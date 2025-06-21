@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Todo List</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      background: #f9f9f9;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    #newItem {
+      width: 75%;
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    #newItem:focus {
+      border-color: #007bff;
+    }
+    button {
+      padding: 11px 20px;
+      font-size: 16px;
+      margin-left: 10px;
+      border: none;
+      border-radius: 6px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 30px;
+    }
+    li {
+      display: flex;
+      align-items: center;
+      background: white;
+      margin-bottom: 12px;
+      padding: 10px 15px;
+      border-radius: 6px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+    li span {
+      flex-grow: 1;
+      margin-left: 12px;
+      font-size: 18px;
+      color: #444;
+      user-select: none;
+    }
+    li span.completed {
+      text-decoration: line-through;
+      color: #888;
+      font-style: italic;
+    }
+    li button {
+      background-color: #dc3545;
+      margin-left: 15px;
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+    li button:hover {
+      background-color: #a71d2a;
+    }
+  </style>
+</head>
+<body>
+  <h1>To-Do List</h1>
+
+  <input type="text" id="newItem" placeholder="Add new task..." />
+  <button onclick="addItem()">Add</button>
+
+  <ul id="itemsList"></ul>
+
+  <script>
+    const API_URL = 'http://localhost:5000/items';
+
+    async function fetchItems() {
+      const res = await fetch(API_URL);
+      const items = await res.json();
+      const list = document.getElementById('itemsList');
+      list.innerHTML = '';
+      items.forEach(item => {
+        const li = document.createElement('li');
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = item.completed;
+        checkbox.onchange = () => toggleComplete(item._id, checkbox.checked);
+
+        const span = document.createElement('span');
+        span.textContent = item.name;
+        if (item.completed) {
+          span.classList.add('completed');
+        }
+
+        const delBtn = document.createElement('button');
+        delBtn.textContent = 'Delete';
+        delBtn.onclick = () => deleteItem(item._id);
+
+        li.appendChild(checkbox);
+        li.appendChild(span);
+        li.appendChild(delBtn);
+        list.appendChild(li);
+      });
+    }
+
+    async function addItem() {
+      const input = document.getElementById('newItem');
+      const name = input.value.trim();
+      if (!name) return alert('Please enter a task name.');
+
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ name })
+      });
+
+      if (res.ok) {
+        input.value = '';
+        fetchItems();
+      } else {
+        alert('Failed to add item');
+      }
+    }
+
+    async function toggleComplete(id, completed) {
+      const res = await fetch(`${API_URL}/${id}`, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ completed })
+      });
+      if (res.ok) {
+        fetchItems();
+      } else {
+        alert('Failed to update item');
+      }
+    }
+
+    async function deleteItem(id) {
+      const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        fetchItems();
+      } else {
+        alert('Failed to delete item');
+      }
+    }
+
+    // Load items on page load
+    fetchItems();
+  </script>
+</body>
+</html>
