@@ -1,7 +1,4 @@
-# apiserver
-# API Server and Frontend
-
-## APIs Created and Their Functionality
+# To-Do List API Server and Frontend
 
 ### Endpoints
 
@@ -13,7 +10,6 @@
 
 - **POST /items**  
   Create a new todo item.  
-  
 
 - **PUT /items/:id**
  Update an existing todo item (e.g., mark as completed).
@@ -22,33 +18,29 @@
  Delete a todo item by its ID.
 
 ### Database Used
-MongoDB is used to store todo items.
+- MongoDB is used to store todo items.
+- The server uses Mongoose for schema definition and database interactions.
 
-The server uses Mongoose for schema definition and database interactions.
+## How to Run the Server
 
-### How to Run the Server
-# Make sure MongoDB is running locally or you have access to a MongoDB connection URI.
+**Make sure MongoDB is running locally or you have access to a MongoDB connection URI.**
 
-# Install dependencies: npm install
-# Start the server: node server.js
+### 1. Install dependencies: npm install
+### 2. Start the server: node server.js
 
 The server will run on: http://localhost:5000
 
-### Running the Frontend 
+### 3. Running the Frontend 
 Open the index.html file in your web browser.
 
 The frontend will communicate with the API server to manage To-Do items.
 
-### How to Interact with the API
+### 4. How to Interact with the API
 Here are some example curl commands you can use to test the API endpoints:
 
-Get all todo items:
-
-curl http://localhost:5000/items
-Create a new todo item: curl -X POST http://localhost:5000/items -H "Content-Type: application/json" -d "{\"name\":\"New Task\"}"
-
-Update a todo item (mark as completed): curl -X PUT http://localhost:5000/items/{id} -H "Content-Type: application/json" -d "{\"completed\":true}"
-
-Delete a todo item: curl -X DELETE http://localhost:5000/items/{id}
-
+- Get all todo items: curl http://localhost:5000/items
+- Create a new todo item: curl -X POST http://localhost:5000/items -H "Content-Type: application/json" -d "{\"name\":\"New Task\"}"
+- Update a todo item (mark as completed): curl -X PUT http://localhost:5000/items/{id} -H "Content-Type: application/json" -d "{\"completed\":true}"
+- Delete a todo item: curl -X DELETE http://localhost:5000/items/{id}
+  
 Note: Replace {id} with the actual ID of the todo item.
