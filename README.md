@@ -13,71 +13,42 @@
 
 - **POST /items**  
   Create a new todo item.  
-  Request body example:
-  {
-    "name": "Task name"
-  }
+  
 
 - **PUT /items/:id**
  Update an existing todo item (e.g., mark as completed).
-Request body example:
-{
-  "completed": true
-}
-DELETE /items/:id: Delete a todo item by its ID.
 
-Database Used
+- **DELETE /items/:id**
+ Delete a todo item by its ID.
+
+### Database Used
 MongoDB is used to store todo items.
 
 The server uses Mongoose for schema definition and database interactions.
 
-How to Run the Server
-Make sure MongoDB is running locally or you have access to a MongoDB connection URI.
+### How to Run the Server
+# Make sure MongoDB is running locally or you have access to a MongoDB connection URI.
 
-Install dependencies:
+# Install dependencies: npm install
+# Start the server: node server.js
 
-bash
-Copy
-Edit
-npm install
-Start the server:
-
-bash
-Copy
-Edit
-node server.js
 The server will run on: http://localhost:5000
 
-How to Run the Frontend Locally (Optional)
+### Running the Frontend 
 Open the index.html file in your web browser.
 
-The frontend will communicate with the API server to manage todo items.
+The frontend will communicate with the API server to manage To-Do items.
 
-How to Interact with the API
+### How to Interact with the API
 Here are some example curl commands you can use to test the API endpoints:
 
 Get all todo items:
 
-bash
-Copy
-Edit
 curl http://localhost:5000/items
-Create a new todo item:
+Create a new todo item: curl -X POST http://localhost:5000/items -H "Content-Type: application/json" -d "{\"name\":\"New Task\"}"
 
-bash
-Copy
-Edit
-curl -X POST http://localhost:5000/items -H "Content-Type: application/json" -d "{\"name\":\"New Task\"}"
-Update a todo item (mark as completed):
+Update a todo item (mark as completed): curl -X PUT http://localhost:5000/items/{id} -H "Content-Type: application/json" -d "{\"completed\":true}"
 
-bash
-Copy
-Edit
-curl -X PUT http://localhost:5000/items/{id} -H "Content-Type: application/json" -d "{\"completed\":true}"
-Delete a todo item:
+Delete a todo item: curl -X DELETE http://localhost:5000/items/{id}
 
-bash
-Copy
-Edit
-curl -X DELETE http://localhost:5000/items/{id}
-Replace {id} with the actual ID of the todo item.
+Note: Replace {id} with the actual ID of the todo item.
