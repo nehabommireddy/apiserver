@@ -1,4 +1,5 @@
 # To-Do List API Server and Frontend
+This project is a full-stack To-Do List application with a custom-built REST API, a MongoDB backend, and a simple HTML frontend for interaction.
 
 ### Endpoints
 
@@ -17,25 +18,27 @@
 - **DELETE /items/:id**
  Delete a todo item by its ID.
 
-### Database Used
-- MongoDB is used to store todo items.
-- The server uses Mongoose for schema definition and database interactions.
+### Tech Stack
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB, Mongoose
+- **Frontend:** HTML, JavaScript
+- **Testing:** Jest, Supertest, mongodb-memory-server
 
 ## How to Run the Server
 
 **Make sure MongoDB is running locally or you have access to a MongoDB connection URI.**
-
-### 1. Install dependencies: npm install
-### 2. Start the server: node server.js
+### 1. Clone the repository
+### 2. Install dependencies: npm install
+### 3. Start the server: node server.js
 
 The server will run on: http://localhost:5000
 
-### 3. Running the Frontend 
+### 4. Running the Frontend 
 Open the index.html file in your web browser.
 
 The frontend will communicate with the API server to manage To-Do items.
 
-### 4. How to Interact with the API
+### 5. How to Interact with the API
 Here are some example curl commands you can use to test the API endpoints:
 
 - Get all todo items: curl http://localhost:5000/items
@@ -44,3 +47,22 @@ Here are some example curl commands you can use to test the API endpoints:
 - Delete a todo item: curl -X DELETE http://localhost:5000/items/{id}
   
 Note: Replace {id} with the actual ID of the todo item.
+
+### Running the Tests
+- run the test suite using npm test
+- to get a coverage report: npm run test:coverage
+
+### Testing Overview
+**Unit Tests**
+- Tool: Jest
+- Description: Tests individual logic (e.g., item model)
+**API Tests**
+- Tool: Supertest
+- Description: Tests REST endpoints
+**Integration Tests**
+- mongodb-memory-server
+- Tests server + database together
+
+### Testing Coverage Screenshot
+![image](https://github.com/user-attachments/assets/a001c6ba-f379-4994-9e5c-535073c7734e)
+
