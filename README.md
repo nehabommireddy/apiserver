@@ -56,13 +56,20 @@ Note: Replace {id} with the actual ID of the todo item.
 **Unit Tests**
 - Tool: Jest
 - Description: Tests individual logic (e.g., item model)
+
 **API Tests**
 - Tool: Supertest
 - Description: Tests REST endpoints
+
 **Integration Tests**
 - mongodb-memory-server
 - Tests server + database together
 
 ### Testing Coverage Screenshot
 ![image](https://github.com/user-attachments/assets/a001c6ba-f379-4994-9e5c-535073c7734e)
+
+### Keploy Tests Screenshot
+![image](https://github.com/user-attachments/assets/e49ed72d-153a-46ce-84c2-2b546d22d415)
+
+
 
