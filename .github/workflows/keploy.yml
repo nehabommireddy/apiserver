@@ -40,6 +40,9 @@ jobs:
           chmod +x keploy-linux
           sudo mv keploy-linux /usr/local/bin/keploy
 
+      - name: Verify Keploy Install
+          run: keploy version
+
       - name: Run Keploy Tests
         run: |
           keploy test -c "node server.js" --delay 5
