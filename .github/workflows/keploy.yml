@@ -24,12 +24,10 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Install Keploy
-        run: |
-          curl -L -o keploy-linux https://github.com/keploy/keploy/releases/latest/download/keploy-linux
-          chmod +x keploy-linux
-          sudo mv keploy-linux /usr/local/bin/keploy
+      - name: Install Keploy CLI
+          run: |
+          curl --silent -L https://keploy.io/ent/install.sh | bash
 
-      - name: Run Keploy Tests
-        run: |
-          keploy test -c "node server.js" --delay 5
+      - name: Run Keploy Test Suite
+         run: |
+          export KEPLOY_API_KEY=i90Ov5GauFPhinRMIQ== && keploy test-suite --app=78559e29-8d6c-491c-a961-fe41e5dc2c85 --base-path http://localhost:5000 --cloud
