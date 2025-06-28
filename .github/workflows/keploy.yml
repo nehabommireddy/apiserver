@@ -24,19 +24,11 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Run the API server in background
-        run: |
-          nohup node server.js &
-          sleep 5  # give the server time to start
-
       - name: Install Keploy
         run: |
           curl -L -o keploy-linux https://github.com/keploy/keploy/releases/latest/download/keploy-linux
           chmod +x keploy-linux
           sudo mv keploy-linux /usr/local/bin/keploy
-
-      - name: Verify Keploy Install
-          run: keploy version
 
       - name: Run Keploy Tests
         run: |
