@@ -36,7 +36,9 @@ jobs:
 
       - name: Install Keploy
         run: |
-          curl -O https://downloads.keploy.io/keploy-linux && chmod +x keploy-linux && sudo mv keploy-linux /usr/local/bin/keploy
+          curl -L -o keploy-linux https://github.com/keploy/keploy/releases/latest/download/keploy-linux
+          chmod +x keploy-linux
+          sudo mv keploy-linux /usr/local/bin/keploy
 
       - name: Run Keploy Tests
         run: |
