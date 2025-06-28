@@ -1,0 +1,44 @@
+openapi: 3.0.0
+info:
+  title: Todo API
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000
+paths:
+  /items:
+    get:
+      summary: Get all todos
+      responses:
+        '200':
+          description: List of todo items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+    post:
+      summary: Create a todo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemInput'
+      responses:
+        '201':
+          description: Created
+components:
+  schemas:
+    Item:
+      type: object
+      properties:
+        _id: { type: string }
+        name: { type: string }
+        completed: { type: boolean }
+    ItemInput:
+      type: object
+      required:
+        - name
+      properties:
+        name: { type: string }
