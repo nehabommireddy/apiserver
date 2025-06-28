@@ -32,4 +32,4 @@ jobs:
 
       - name: Run Keploy Tests
         run: |
-          keploy test -c "node server.js" --delay 5
+          keploy test 
